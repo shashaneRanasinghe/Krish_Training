@@ -28,59 +28,43 @@ function isAnagram(inputText){
     return ("Anagram")
 }
 
-function sortList(list, initIndex, finalIndex) {
+function sortList(list) {
 
-    if (initIndex >= finalIndex) {
-        return;
-    }
-        var midIndex = initIndex + Math.floor((finalIndex - initIndex) / 2);
+    if (list.length > 1) {
 
-        sortList(list, initIndex, midIndex);
-        sortList(list, midIndex + 1, finalIndex);
-        merge(list, initIndex, midIndex, finalIndex);
-    
-    
-}
+        var midIndex = Math.floor((list.length) / 2);
 
-function merge(list, initIndex, middleIndex, finalIndex) {
+        var leftArray = list.slice(0,midIndex)
+        var rightArray = list.slice(midIndex,list.length)
 
-    var sizeOfLeftArray = middleIndex - initIndex + 1;
-	var sizeOfRightArray = finalIndex - middleIndex;
+        sortList(leftArray);
+        sortList(rightArray);
+        var i = 0;
+        var j = 0;
+        var k = 0;
 
-	var tempLeftArray = new Array(sizeOfLeftArray);
-	var tempRightArray = new Array(sizeOfRightArray);
-
-    for (i = 0; i < sizeOfLeftArray; i++) {
-        tempLeftArray[i] = list[initIndex + i];
-    }
-    for (j = 0; j < sizeOfRightArray; j++) {
-        tempRightArray[j] = list[middleIndex + 1 + j];
-    }
-
-    var i = 0;
-    var j = 0;
-    var k = initIndex;
-
-    while (i < sizeOfLeftArray && j < sizeOfRightArray) {
-        // console.log(tempLeftArray[i].charCodeAt(0),tempRightArray[j].charCodeAt(0))
-        if (tempLeftArray[i].charCodeAt(0) <= tempRightArray[j].charCodeAt(0)) {
-            list[k] = tempLeftArray[i]
-            i++;
-        } else {
-            list[k] = tempRightArray[j];
-            j++;
+        while (i < leftArray.length && j < rightArray.length) {
+            if (leftArray[i].charCodeAt(0) <= rightArray[j].charCodeAt(0)) {
+                list[k] = leftArray[i]
+                i++;
+            } else {
+                list[k] = rightArray[j];
+                j++;
+            }
+            k++;
         }
-        k++;
+    
+        while (i < leftArray.length) {
+            list[k] = leftArray[i]
+            i++;
+            k++;
+        }
+        while (j < rightArray.length) {
+            list[k] = rightArray[j];
+            j++;
+            k++;
+        }
     }
+    return;
 
-    while (i < sizeOfLeftArray) {
-        list[k] = tempLeftArray[i]
-        i++;
-        k++;
-    }
-    while (j < sizeOfRightArray) {
-        list[k] = tempRightArray[j];
-        j++;
-        k++;
-    }
 }
