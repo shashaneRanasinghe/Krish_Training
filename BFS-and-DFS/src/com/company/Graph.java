@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Graph {
 
     private int noOfVertices;
-    private LinkedList<Integer> adjlist[];
+    private LinkedList[] adjlist;
 
     public Graph(int noOfVertices){
         this.noOfVertices = noOfVertices;
@@ -17,8 +17,8 @@ public class Graph {
         }
     }
 
-    public void addEdge(int vertex, int value){
-        adjlist[vertex].add(value);
+    public void addEdge(int vertex, int nextVertex){
+        adjlist[vertex].add(nextVertex);
     }
 
     public int getNoOfVertices() {
