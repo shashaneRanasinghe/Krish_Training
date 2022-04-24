@@ -1,0 +1,4 @@
+service:
+  greeting: "hello from service 1"
+  ID: 1
+
